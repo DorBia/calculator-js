@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&family=Open+Sans:wght@400;500;700&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -11,10 +11,23 @@ body {
   background-image: linear-gradient(to right, #656565, #959595, #a8a8a8);
 }
 
+hr {
+  border-color: #343232;
+  border-style: dotted none none;
+  border-width: 10px;
+  height: 0px;
+  width: 50%;
+  margin: auto;
+  opacity: 0.7;
+}
+
 h1 {
-  color: #362828;
+  color: #111111;
   text-align: center;
-  margin: 5vh auto;
+  margin: 5vh auto 3vh;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-size: 2.2rem;
+  text-shadow: -2px 2px 5px #5c5c5c;
 }
 
 button {
@@ -44,7 +57,7 @@ button:hover {
 }
 
 .calculator {
-  margin: auto;
+  margin: 8vh auto;
   height: 600px;
   max-width: 350px;
   border-radius: 20px;
@@ -52,6 +65,7 @@ button:hover {
   flex-direction: column;
   justify-content: space-around;
   background-color: #111111;
+  box-shadow: -15px 15px 15px #5c5c5c;
 }
 .calculator__screen {
   height: 15%;
@@ -79,4 +93,14 @@ button:hover {
 .calculator__operator:hover, .calculator__equals:hover {
   background-color: #fff;
   color: #f5ac24;
+}
+
+@media screen and (max-height: 830px) {
+  header {
+    display: none;
+  }
+
+  .calculator {
+    margin: 3vh auto;
+  }
 }
