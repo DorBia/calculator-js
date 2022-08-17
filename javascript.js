@@ -4,56 +4,120 @@ const clear = document.querySelector(".ac");
 const changeSign = document.querySelector(".change-sign");
 const numberButtons = document.querySelectorAll(".calculator__number");
 const percent = document.querySelector(".percent");
-const operators = document.querySelectorAll(".operator");
+const operators = document.querySelectorAll(".calculator__operator");
+const equal = document.querySelector(".calculator__equal");
 
+
+
+let currentValue = "";
+let operator = "";
+let storedValue = "";
+let sum = "";
 
 changeModeButton.addEventListener("click", () => {
     const pageBody = document.body;
     pageBody.classList.toggle("light-mode");
 });
 
+
 const smallerDisplayText = () => {
-    if (display.innerText.length > 15){
-        display.setAttribute("style", "font-size: 1.5rem");
+    if (display.innerText.length > 18){
+        display.style = "font-size: 1.5rem";
     } else if (display.innerText.length > 12){
-        display.setAttribute("style", "font-size: 2rem");
+        display.style = "font-size: 2rem";
     } else if (display.innerText.length > 9){
-        display.setAttribute("style", "font-size: 3rem");
+        display.style = "font-size: 3rem";
     } else if (display.innerText.length > 6) {
-        display.setAttribute("style", "font-size: 4rem");
+        display.style = "font-size: 4rem";
     }  else if (display.innerText.length <= 6) {
-        display.setAttribute("style", "font-size: 5rem");
+        display.style = "font-size: 5rem";
     }
 };
 
-numberButtons.forEach(item => {
-    item.addEventListener("click", () => {
-        clear.innerText = "C"
-        if(display.innerText == "0"){
-            display.innerText = item.innerText;
-        } else {
-            display.innerText += item.innerText;
-            console.log(typeof display.innerText)
-            smallerDisplayText();
+const updateDisplay = (number) => display.innerText = number;
+
+
+numberButtons.forEach(number => {
+    number.addEventListener("click", () => {
+        if (sum) {
+            storedValue = sum;
         }
+        clear.innerText = "C"
+        if(!currentValue){
+            currentValue = number.innerText;
+        } else {
+            currentValue += number.innerText;
+        }
+        updateDisplay(currentValue);
+        smallerDisplayText();
     })
 });
 
 clear.addEventListener("click", () => {
-    display.innerText = "0";
-    clear.innerText = "AC";
+    updateDisplay("0");
+    if(clear.innerText === "C"){
+        clear.innerText = "AC";
+        currentValue = "";
+    } else {
+        currentValue = "";
+        sum = "";
+        storedValue = "";
+    }
+
+    
     smallerDisplayText();
 });
 
 changeSign.addEventListener("click", () => {
-    if(Array.from(display.innerText)[0] == "-"){
-        display.innerText = display.innerText.slice(1);
+    if(currentValue.includes("-")){
+        currentValue = currentValue.slice(1);
     } else { 
-        display.innerText = "-" + display.innerText;
+        currentValue = "-" + currentValue;
     }
+    updateDisplay(currentValue);
+    smallerDisplayText();
 });
 
 percent.addEventListener("click", () => {
-    display.innerText = Number(display.innerText) / 100;
+    if ((sum && operator === "add") || (sum && operator === "subtract")) {
+        currentValue = (Number(sum) * Number(display.innerText) / 100).toString();
+    } else {
+        currentValue = (Number(display.innerText) / 100).toString();
+    }
+    
+    updateDisplay(currentValue);
+    smallerDisplayText();
+});
+
+
+operators.forEach((button) => {
+    button.addEventListener("click", () => {
+        operator = button.getAttribute("value");
+
+        if(currentValue) {
+            storedValue = currentValue;
+            currentValue = "";
+        }
+    })
+});
+
+
+equal.addEventListener("click", () => {
+    switch (operator) {
+        case "add":
+            sum = (Number(storedValue) + Number(currentValue)).toString();
+            break;
+        case "subtract":
+            sum = (Number(storedValue) - Number(currentValue)).toString();
+            break;
+        case "multiply":
+            sum = (Number(storedValue) * Number(currentValue)).toString();
+            break;
+        case "divide":
+            sum = (Number(storedValue) / Number(currentValue)).toString();
+            break;
+    }
+    storedValue = sum;
+    updateDisplay(sum);
     smallerDisplayText();
 })
