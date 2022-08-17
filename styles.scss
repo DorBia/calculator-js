@@ -7,6 +7,7 @@ $font-header: 'M PLUS Rounded 1c', sans-serif;
 $color-background: #121c24;
 $color-text: #cbd8df;
 $color-shadow: #5c5c5c;
+$color-box-shadow: #b1b1b1;
 
 $color-buttons-main: #0e2935;
 $color-hover-main: #d7f9f8;
@@ -14,6 +15,8 @@ $color-hover-main: #d7f9f8;
 $color-top-row: #9ac5d3;
 $color-operators: #159ab7;
 
+// for light theme
+$color-buttons-light: #1e5067;
 
 // reset styling and set color of everything to white + body's background
 
@@ -30,24 +33,20 @@ body {
 }
 
 // basic styling of header and generic styling for buttons
+header {
+    text-align: center;
+}
 
 h1 {
-    color: $color-background;
-    text-align: center;
-    margin: 5vh auto 3vh;
+    margin: 3vh auto 1vh;
     font-family: $font-header;
     font-size: 2.2rem;
+    color: $color-background;
     text-shadow: -2px 2px 5px $color-shadow;
 }
 
 hr {
-    border-color: $color-buttons-main;
-    border-style: dotted none none;
-    border-width: 10px;
-    height: 0px;
-    width:50%;
-    margin: auto;
-    opacity: 0.7;
+    display: none;
 }
 
 button {
@@ -59,7 +58,7 @@ button {
     margin: auto;
     border: none;
     font-size: 1.7rem;
-    box-shadow: 0px 2px 5px #235b75, inset 0px 2px 1px #b1b1b1;
+    box-shadow: 0px 2px 5px #235b75, inset 0px 2px 1px $color-box-shadow;
 
     &:hover {
         cursor: pointer;
@@ -81,16 +80,25 @@ button {
     padding-bottom: 0.5rem;
 }
 
+.change-mode {
+    height: 4rem;
+    width: 18rem;
+    border-radius: 25px;
+    font-size: 1.3rem;
+    padding: 5px;
+}
+
+
 // calculator's body styling
 
 .calculator {
-    margin: 8vh auto;
+    margin: 5vh auto;
     height: 600px;
     max-width: 350px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     background-color: $color-background;
     box-shadow: -11px 11px 10px $color-shadow;
 
@@ -104,11 +112,12 @@ button {
 
 
     &__screen {
-        height: 15%;
+        height: 22%;
     }
 
     &__display {
         font-size: 5rem;
+        padding-top: 20px;
         text-align: right;
         margin-right: 1rem;
         margin-top: 1rem;
@@ -126,7 +135,8 @@ button {
     &__decimal {
         box-shadow: 0px 2px 5px #163a4a, inset 0px 2px 1px #4f4f4f;
 
-        &:hover {
+        &:hover,
+        &:focus {
             background-color: $color-top-row;
             color: $color-background;
             box-shadow: inset -1px 2px 20px $color-shadow;
@@ -137,7 +147,8 @@ button {
         background-color: $color-top-row;
         color: $color-background;
 
-        &:hover {
+        &:hover,
+        &:focus {
             background-color: $color-text;
         }
     }
@@ -147,7 +158,8 @@ button {
         background-color: $color-operators;
         font-size: 2.3rem;
 
-        &:hover {
+        &:hover,
+        &:focus  {
             background-color: $color-hover-main;
             color: $color-operators;
         }
@@ -155,14 +167,103 @@ button {
 }
 
 
-@media screen and (max-height: 830px) {
-    
-    header {
+@media screen and (max-height: 895px) {
+
+    h1,
+    hr {
         display: none;
     }
 
-    .calculator {
-        margin: 3vh auto;
+    .change-mode {
+        margin-top: 5vh;
+        height: 2.7rem;
+        width: 15rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        padding: 5px;
     }
 
+    .calculator {
+        margin: 1.5vh auto;
+    }
+
+}
+
+@media screen and (max-height: 750px) {
+    .change-mode {
+        margin-top: 1vh;
+    }
+}
+
+.light-mode {
+    background-image: linear-gradient(to right, #19849c, #4cba9b);
+
+    h1 {
+        color: $color-text;
+    }
+
+    .change-mode {
+        background-color: $color-top-row;
+        color: $color-background;
+    }
+
+    .calculator {
+        background-color: $color-text;
+        box-shadow: -11px 11px 10px rgba(137, 137, 137, 0.55);
+
+        &:hover {
+            box-shadow: -15px 15px 15px rgba(137, 137, 137, 0.55);
+        }
+
+        &__display {
+            color: $color-buttons-light;
+        }
+
+        &__number,
+        &__decimal {
+            background-color: $color-buttons-light;
+            &:hover,
+            &:focus {
+                background-color: $color-top-row;
+                box-shadow: inset -1px 2px 12px $color-shadow;
+
+            }
+        }
+
+        &__top-row {
+            box-shadow: 0px 2px 5px #afafaf, inset 0px 2px 1px $color-box-shadow;
+
+            &:hover,
+            &:focus {
+                background-color: $color-box-shadow;
+                opacity: 0.8;
+            }
+        }
+    }
+    
+}
+
+@media screen and (min-width: 768px) and (min-height: 940px) {
+
+    .change-mode {
+        margin: 2rem auto;
+    }
+
+    hr {
+        display: block;
+        border-color: $color-buttons-main;
+        border-style: dotted none none;
+        border-width: 10px;
+        height: 0px;
+        width:50%;
+        margin: auto;
+        opacity: 0.7;
+        margin-top: 1vh;
+    }
+
+    .light-mode {
+        hr {
+            border-color: $color-text;
+        }
+    }
 }

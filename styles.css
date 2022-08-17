@@ -11,23 +11,20 @@ body {
   background-image: linear-gradient(to right, #656565, #a8a8a8);
 }
 
-h1 {
-  color: #121c24;
+header {
   text-align: center;
-  margin: 5vh auto 3vh;
+}
+
+h1 {
+  margin: 3vh auto 1vh;
   font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 2.2rem;
+  color: #121c24;
   text-shadow: -2px 2px 5px #5c5c5c;
 }
 
 hr {
-  border-color: #0e2935;
-  border-style: dotted none none;
-  border-width: 10px;
-  height: 0px;
-  width: 50%;
-  margin: auto;
-  opacity: 0.7;
+  display: none;
 }
 
 button {
@@ -57,14 +54,22 @@ button:hover {
   padding-bottom: 0.5rem;
 }
 
+.change-mode {
+  height: 4rem;
+  width: 18rem;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  padding: 5px;
+}
+
 .calculator {
-  margin: 8vh auto;
+  margin: 5vh auto;
   height: 600px;
   max-width: 350px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   background-color: #121c24;
   box-shadow: -11px 11px 10px #5c5c5c;
 }
@@ -75,10 +80,11 @@ button:hover {
   box-shadow: -15px 15px 15px #5c5c5c;
 }
 .calculator__screen {
-  height: 15%;
+  height: 22%;
 }
 .calculator__display {
   font-size: 5rem;
+  padding-top: 20px;
   text-align: right;
   margin-right: 1rem;
   margin-top: 1rem;
@@ -93,7 +99,7 @@ button:hover {
 .calculator__number, .calculator__decimal {
   box-shadow: 0px 2px 5px #163a4a, inset 0px 2px 1px #4f4f4f;
 }
-.calculator__number:hover, .calculator__decimal:hover {
+.calculator__number:hover, .calculator__number:focus, .calculator__decimal:hover, .calculator__decimal:focus {
   background-color: #9ac5d3;
   color: #121c24;
   box-shadow: inset -1px 2px 20px #5c5c5c;
@@ -102,24 +108,95 @@ button:hover {
   background-color: #9ac5d3;
   color: #121c24;
 }
-.calculator__top-row:hover {
+.calculator__top-row:hover, .calculator__top-row:focus {
   background-color: #cbd8df;
 }
 .calculator__operator, .calculator__equals {
   background-color: #159ab7;
   font-size: 2.3rem;
 }
-.calculator__operator:hover, .calculator__equals:hover {
+.calculator__operator:hover, .calculator__operator:focus, .calculator__equals:hover, .calculator__equals:focus {
   background-color: #d7f9f8;
   color: #159ab7;
 }
 
-@media screen and (max-height: 830px) {
-  header {
+@media screen and (max-height: 895px) {
+  h1,
+hr {
     display: none;
   }
 
+  .change-mode {
+    margin-top: 5vh;
+    height: 2.7rem;
+    width: 15rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    padding: 5px;
+  }
+
   .calculator {
-    margin: 3vh auto;
+    margin: 1.5vh auto;
+  }
+}
+@media screen and (max-height: 750px) {
+  .change-mode {
+    margin-top: 1vh;
+  }
+}
+.light-mode {
+  background-image: linear-gradient(to right, #19849c, #4cba9b);
+}
+.light-mode h1 {
+  color: #cbd8df;
+}
+.light-mode .change-mode {
+  background-color: #9ac5d3;
+  color: #121c24;
+}
+.light-mode .calculator {
+  background-color: #cbd8df;
+  box-shadow: -11px 11px 10px rgba(137, 137, 137, 0.55);
+}
+.light-mode .calculator:hover {
+  box-shadow: -15px 15px 15px rgba(137, 137, 137, 0.55);
+}
+.light-mode .calculator__display {
+  color: #1e5067;
+}
+.light-mode .calculator__number, .light-mode .calculator__decimal {
+  background-color: #1e5067;
+}
+.light-mode .calculator__number:hover, .light-mode .calculator__number:focus, .light-mode .calculator__decimal:hover, .light-mode .calculator__decimal:focus {
+  background-color: #9ac5d3;
+  box-shadow: inset -1px 2px 12px #5c5c5c;
+}
+.light-mode .calculator__top-row {
+  box-shadow: 0px 2px 5px #afafaf, inset 0px 2px 1px #b1b1b1;
+}
+.light-mode .calculator__top-row:hover, .light-mode .calculator__top-row:focus {
+  background-color: #b1b1b1;
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) and (min-height: 940px) {
+  .change-mode {
+    margin: 2rem auto;
+  }
+
+  hr {
+    display: block;
+    border-color: #0e2935;
+    border-style: dotted none none;
+    border-width: 10px;
+    height: 0px;
+    width: 50%;
+    margin: auto;
+    opacity: 0.7;
+    margin-top: 1vh;
+  }
+
+  .light-mode hr {
+    border-color: #cbd8df;
   }
 }
