@@ -6,6 +6,7 @@ $font-header: 'M PLUS Rounded 1c', sans-serif;
 
 $color-background: #121c24;
 $color-text: #cbd8df;
+
 $color-shadow: #5c5c5c;
 $color-box-shadow: #b1b1b1;
 
@@ -15,8 +16,11 @@ $color-hover-main: #d7f9f8;
 $color-top-row: #9ac5d3;
 $color-operators: #159ab7;
 
+$gradient-dark: linear-gradient(to right, #656565, #a8a8a8);
+
 // for light theme
 $color-buttons-light: #1e5067;
+$gradient-light: linear-gradient(to right, #19849c, #4cba9b);
 
 // reset styling and set color of everything to white + body's background
 
@@ -29,7 +33,7 @@ $color-buttons-light: #1e5067;
 
 body {
     height: 100%;
-    background-image: linear-gradient(to right, #656565, #a8a8a8);
+    background-image: $gradient-dark;
 }
 
 // basic styling of header and generic styling for buttons
@@ -164,8 +168,10 @@ button {
     }
 }
 
+// light mode styling
+
 .light-mode {
-    background-image: linear-gradient(to right, #19849c, #4cba9b);
+    background-image: $gradient-light;
 
     h1 {
         color: $color-text;
@@ -209,6 +215,7 @@ button {
     
 }
 
+// media queries
 
 @media screen and (max-height: 750px) {
     .change-mode {
