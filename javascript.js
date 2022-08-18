@@ -1,3 +1,4 @@
+/* ----- GET ACCESS TO HTML ------- */
 const changeModeButton = document.querySelector(".change-mode");
 const display = document.querySelector(".calculator__display");
 const clear = document.querySelector(".ac");
@@ -9,20 +10,34 @@ const operators = document.querySelectorAll(".calculator__operator");
 const equal = document.querySelector(".calculator__equal");
 
 
+/* --------- VARIABLES ------- */
+// basic variables
 let currentValue = "";
 let operator = "";
-let previousOperator = "";
 let storedValue = "";
 let sum = "";
+
+// needed specifically for some functions
+
+// for using operators as equal
+let previousOperator = "";
+
+//to reverse sum and make it as a current one and to make % out of the sum
 let isEqualOn = false;
 
-changeModeButton.addEventListener("click", () => {
-    const pageBody = document.body;
-    pageBody.classList.toggle("light-mode");
-});
+// to not add numbers accidentally by using operators after reversing the sum
+let isReverseOn = false;
+
+// to be able add old number by using only equal, without changing old number each time
+let isOperatorOn = false;
+let tempValue = "";
 
 
+/* ------ REUSABLE FUNCTIONS ------- */
+
+// make font-size on the display smaller/bigger depending on the length of the text
 const smallerDisplayText = () => {
+
     if (display.innerText.length > 18){
         display.style = "font-size: 1.5rem";
     } else if (display.innerText.length > 12){
@@ -36,80 +51,124 @@ const smallerDisplayText = () => {
     }
 };
 
-const updateDisplay = (number) => display.innerText = number;
+// update display with the number given
+const updateDisplay = (number) => {
 
-const doMath = (number1, number2, op) => {
-    switch (op) {
+    display.innerText = number
+    if (number === "") {
+        display.innerText = "0";
+    } else if(number === "-") {
+        display.innerText = "-0";
+    }
+};
+
+/*just do some math, using 3 parameters - 2 numbers and the operator 
+so it works with operator buttons and not just the equal button */
+const doMath = (num1, num2, operation) => {
+
+    switch (operation) {
         case "add":
-            sum = (Number(number1) + Number(number2)).toString();
+            sum = (Number(num1) + Number(num2)).toString();
             break;
         case "subtract":
-            sum = (Number(number1) - Number(number2)).toString();
+            sum = (Number(num1) - Number(num2)).toString();
             break;
         case "multiply":
-            sum = (Number(number1) * Number(number2)).toString();
+            sum = (Number(num1) * Number(num2)).toString();
             break;
         case "divide":
-            sum = (Number(number1) / Number(number2)).toString();
+            sum = (Number(num1) / Number(num2)).toString();
             break;
     }
     return sum;
-}
+};
 
 
+/* ------- ACTUAL CLICK EVENTS ------- */
+
+// add functionality to change the theme between dark and light
+changeModeButton.addEventListener("click", () => {
+    const pageBody = document.body;
+    pageBody.classList.toggle("light-mode");
+});
+
+// for each number 0-9 when they are pressed "unclick" the +/= and equals buttons, change AC to C
 numberButtons.forEach(number => {
     number.addEventListener("click", () => {
-        if (sum) {
-            storedValue = sum;
+        //check if equal button is on, if yes reset current value to not add after previous number
+        if (isEqualOn) {
+            currentValue = "";
         }
-        clear.innerText = "C"
+
         if(!currentValue || currentValue === "0"){
             currentValue = number.innerText;
         } else {
             currentValue += number.innerText;
         }
+
+        isEqualOn = false;
+        isReverseOn = false;
+        clear.innerText = "C"
         updateDisplay(currentValue);
         smallerDisplayText();
     })
 });
 
+// for decimal button
 decimal.addEventListener("click", () => {
-    if (!currentValue || isEqualOn) {
+
+    if (!currentValue) {
         currentValue = "0.";
     } else if (currentValue && !currentValue.includes(".")) {
         currentValue += ".";
     }
     updateDisplay(currentValue);
     smallerDisplayText();
-})
+});
 
+//clear - if the current value is C, clear only operator and current value, else clear everything
 clear.addEventListener("click", () => {
+
     if(clear.innerText === "C"){
         clear.innerText = "AC";
-        currentValue = "";
     } else {
-        currentValue = "";
         sum = "";
         storedValue = "";
     }
 
+    currentValue = "";
+    operator = "";
     updateDisplay("0");
     smallerDisplayText();
 });
 
+/* set reverse button to be "clicked" - if there is current value do *(-1) on that value
+else if equal button is "clicked" - do *(-1) on the sum and set it as current, clear the sum */
 changeSign.addEventListener("click", () => {
-    if(currentValue.includes("-")){
-        currentValue = currentValue.slice(1);
-    } else { 
-        currentValue = "-" + currentValue;
+
+    isReverseOn = true;
+
+    if (currentValue) {
+        currentValue = (Number(currentValue) * (-1)).toString();
+    } else if(isEqualOn) {
+        currentValue = (Number(sum) * (-1)).toString();
+        sum = "";
+    } else if (!currentValue) {
+        currentValue = "-";
     }
+    
     updateDisplay(currentValue);
     smallerDisplayText();
 });
 
+/* percent button - if reverse or equal buttons are "clicked", divide number shown by 100
+else if add or subtract and has previous value - get chosen percent from the stored value */
 percent.addEventListener("click", () => {
-    if ((sum && operator === "add") || (sum && operator === "subtract")) {
-        currentValue = (Number(sum) * Number(display.innerText) / 100).toString();
+
+    if (isReverseOn || isEqualOn) {
+        currentValue = (Number(display.innerText) / 100).toString();
+    } else if ((storedValue && previousOperator === "add") || (storedValue && previousOperator === "subtract")) {
+        currentValue = (Number(storedValue) * Number(display.innerText) / 100).toString();
     } else {
         currentValue = (Number(display.innerText) / 100).toString();
     }
@@ -118,12 +177,21 @@ percent.addEventListener("click", () => {
     smallerDisplayText();
 });
 
-
+/* set operator
+if the +/- and equal buttons are "clicked" avoid doing math
+if there are 2 numbers and previous operation, do previous, to prevent things like "30 + 30 -" showing 0
+else if there is current value only just store it and clear current
+always set previousOperator value and clear the current one, 
+"click" the operator button, "unclick" the equal and +/- buttons */
 operators.forEach((button) => {
     button.addEventListener("click", event => {
+
         operator = event.target.value;
 
-        if(storedValue && currentValue) {
+        if (isReverseOn && isEqualOn) {
+            storedValue = currentValue;
+            currentValue = "";
+        } else if(storedValue && currentValue) {
             if (!previousOperator) {
                 storedValue = doMath(storedValue, currentValue, operator);
             } else {
@@ -139,29 +207,60 @@ operators.forEach((button) => {
         }
 
         previousOperator = operator;
+        operator = "";
+        isOperatorOn = true;
+        isEqualOn = false;
+        isReverseOn = false;
     })
 });
 
+// "click" equal button, if there is no previous operator avoid any action, else set 2 new variables
 equal.addEventListener("click", () => {
-    isEqualOn = true;
-    let number1 = "";
-    let number2 = "";
 
-    if (currentValue){
-        number1 = storedValue; 
-        number2 = currentValue;
-    } else {
-        if(sum) {
-            number1 = sum; 
-            number2 = sum;
-        } else {
-            number1 = storedValue; 
-            number2 = storedValue;
-        }
+    isEqualOn = true;
+
+    /* to be able to add current number to the sum later on just by hitting equals,
+    but without changing it each time equals is used,
+    only changes if operator was chosen before */
+    if(currentValue) {
+        tempValue = currentValue;
+    } else if(!currentValue && isOperatorOn) {
+        tempValue = storedValue;
     }
-    
-    doMath(number1, number2, operator);
-    storedValue = sum;
-    updateDisplay(sum);
-    smallerDisplayText();
-})
+
+    if (!previousOperator) {
+        void(0);
+    } else {
+        let number1 = "";
+        let number2 = "";
+        /* if there is current value, then just doMath stored operator current e.g.(stored + currentValue)
+        else if there is a sum, check if the operator button is on, if yes just doMath on 2 sums
+        else if operator is off then doMath on sum and temporary number
+        if first use, and not passed current value, doMath on stored value */
+        if (currentValue){
+            number1 = storedValue; 
+            number2 = currentValue;
+        } else {
+            if(sum) {
+                if(isOperatorOn){
+                    number1 = sum; 
+                    number2 = sum;
+                } else {
+                    number1 = sum;
+                    number2 = tempValue;
+                }
+
+            } else {
+                number1 = storedValue; 
+                number2 = storedValue;
+            }
+        }
+
+        doMath(number1, number2, previousOperator);
+        updateDisplay(sum);
+        smallerDisplayText();
+        storedValue = sum;
+        currentValue = "";
+        isOperatorOn = false;
+    }
+});

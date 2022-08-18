@@ -100,14 +100,12 @@ button {
     flex-direction: column;
     justify-content: center;
     background-color: $color-background;
-    box-shadow: -11px 11px 10px $color-shadow;
+    box-shadow: -15px 15px 15px $color-shadow;
+
 
 
     &:hover {
         cursor: pointer;
-        transform: translate(3px, -3px);
-        transition-duration: 100ms;
-        box-shadow: -15px 15px 15px $color-shadow;
     }
 
 
@@ -180,11 +178,8 @@ button {
 
     .calculator {
         background-color: $color-text;
-        box-shadow: -11px 11px 10px rgba(137, 137, 137, 0.55);
+        box-shadow: -15px 15px 15px rgba(137, 137, 137, 0.55);
 
-        &:hover {
-            box-shadow: -15px 15px 15px rgba(137, 137, 137, 0.55);
-        }
 
         &__display {
             color: $color-buttons-light;

@@ -71,13 +71,10 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   background-color: #121c24;
-  box-shadow: -11px 11px 10px #5c5c5c;
+  box-shadow: -15px 15px 15px #5c5c5c;
 }
 .calculator:hover {
   cursor: pointer;
-  transform: translate(3px, -3px);
-  transition-duration: 100ms;
-  box-shadow: -15px 15px 15px #5c5c5c;
 }
 .calculator__screen {
   height: 22%;
@@ -132,9 +129,6 @@ button:hover {
 }
 .light-mode .calculator {
   background-color: #cbd8df;
-  box-shadow: -11px 11px 10px rgba(137, 137, 137, 0.55);
-}
-.light-mode .calculator:hover {
   box-shadow: -15px 15px 15px rgba(137, 137, 137, 0.55);
 }
 .light-mode .calculator__display {
