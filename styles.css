@@ -108,11 +108,11 @@ button:hover {
 .calculator__top-row:hover, .calculator__top-row:focus {
   background-color: #cbd8df;
 }
-.calculator__operator, .calculator__equals {
+.calculator__operator, .calculator__equal {
   background-color: #159ab7;
   font-size: 2.3rem;
 }
-.calculator__operator:hover, .calculator__operator:focus, .calculator__equals:hover, .calculator__equals:focus {
+.calculator__operator:hover, .calculator__operator:focus, .calculator__equal:hover, .calculator__equal:focus {
   background-color: #d7f9f8;
   color: #159ab7;
 }
