@@ -166,35 +166,6 @@ button {
     }
 }
 
-
-@media screen and (max-height: 895px) {
-
-    h1,
-    hr {
-        display: none;
-    }
-
-    .change-mode {
-        margin-top: 5vh;
-        height: 2.7rem;
-        width: 15rem;
-        border-radius: 25px;
-        font-size: 1rem;
-        padding: 5px;
-    }
-
-    .calculator {
-        margin: 1.5vh auto;
-    }
-
-}
-
-@media screen and (max-height: 750px) {
-    .change-mode {
-        margin-top: 1vh;
-    }
-}
-
 .light-mode {
     background-image: linear-gradient(to right, #19849c, #4cba9b);
 
@@ -241,6 +212,34 @@ button {
         }
     }
     
+}
+
+
+@media screen and (max-height: 750px) {
+    .change-mode {
+        margin-top: 1vh;
+    }
+}
+
+@media screen and (max-height: 895px) {
+
+    h1 {
+        display: none;
+    }
+
+    .change-mode {
+        margin-top: 5vh;
+        height: 2.7rem;
+        width: 15rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        padding: 5px;
+    }
+
+    .calculator {
+        margin: 1.5vh auto;
+    }
+
 }
 
 @media screen and (min-width: 768px) and (min-height: 940px) {

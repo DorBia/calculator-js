@@ -4,15 +4,17 @@ const clear = document.querySelector(".ac");
 const changeSign = document.querySelector(".change-sign");
 const numberButtons = document.querySelectorAll(".calculator__number");
 const percent = document.querySelector(".percent");
+const decimal = document.querySelector(".calculator__decimal")
 const operators = document.querySelectorAll(".calculator__operator");
 const equal = document.querySelector(".calculator__equal");
 
 
-
 let currentValue = "";
 let operator = "";
+let previousOperator = "";
 let storedValue = "";
 let sum = "";
+let isEqualOn = false;
 
 changeModeButton.addEventListener("click", () => {
     const pageBody = document.body;
@@ -36,6 +38,24 @@ const smallerDisplayText = () => {
 
 const updateDisplay = (number) => display.innerText = number;
 
+const doMath = (number1, number2, op) => {
+    switch (op) {
+        case "add":
+            sum = (Number(number1) + Number(number2)).toString();
+            break;
+        case "subtract":
+            sum = (Number(number1) - Number(number2)).toString();
+            break;
+        case "multiply":
+            sum = (Number(number1) * Number(number2)).toString();
+            break;
+        case "divide":
+            sum = (Number(number1) / Number(number2)).toString();
+            break;
+    }
+    return sum;
+}
+
 
 numberButtons.forEach(number => {
     number.addEventListener("click", () => {
@@ -43,7 +63,7 @@ numberButtons.forEach(number => {
             storedValue = sum;
         }
         clear.innerText = "C"
-        if(!currentValue){
+        if(!currentValue || currentValue === "0"){
             currentValue = number.innerText;
         } else {
             currentValue += number.innerText;
@@ -53,8 +73,17 @@ numberButtons.forEach(number => {
     })
 });
 
+decimal.addEventListener("click", () => {
+    if (!currentValue || isEqualOn) {
+        currentValue = "0.";
+    } else if (currentValue && !currentValue.includes(".")) {
+        currentValue += ".";
+    }
+    updateDisplay(currentValue);
+    smallerDisplayText();
+})
+
 clear.addEventListener("click", () => {
-    updateDisplay("0");
     if(clear.innerText === "C"){
         clear.innerText = "AC";
         currentValue = "";
@@ -64,7 +93,7 @@ clear.addEventListener("click", () => {
         storedValue = "";
     }
 
-    
+    updateDisplay("0");
     smallerDisplayText();
 });
 
@@ -91,32 +120,47 @@ percent.addEventListener("click", () => {
 
 
 operators.forEach((button) => {
-    button.addEventListener("click", () => {
-        operator = button.getAttribute("value");
+    button.addEventListener("click", event => {
+        operator = event.target.value;
 
-        if(currentValue) {
+        if(storedValue && currentValue) {
+            if (!previousOperator) {
+                storedValue = doMath(storedValue, currentValue, operator);
+            } else {
+                storedValue = doMath(storedValue, currentValue, previousOperator);
+            }
+                currentValue = "";
+                updateDisplay(sum);
+                smallerDisplayText();
+            
+        } else if(currentValue) {
             storedValue = currentValue;
             currentValue = "";
         }
+
+        previousOperator = operator;
     })
 });
 
-
 equal.addEventListener("click", () => {
-    switch (operator) {
-        case "add":
-            sum = (Number(storedValue) + Number(currentValue)).toString();
-            break;
-        case "subtract":
-            sum = (Number(storedValue) - Number(currentValue)).toString();
-            break;
-        case "multiply":
-            sum = (Number(storedValue) * Number(currentValue)).toString();
-            break;
-        case "divide":
-            sum = (Number(storedValue) / Number(currentValue)).toString();
-            break;
+    isEqualOn = true;
+    let number1 = "";
+    let number2 = "";
+
+    if (currentValue){
+        number1 = storedValue; 
+        number2 = currentValue;
+    } else {
+        if(sum) {
+            number1 = sum; 
+            number2 = sum;
+        } else {
+            number1 = storedValue; 
+            number2 = storedValue;
+        }
     }
+    
+    doMath(number1, number2, operator);
     storedValue = sum;
     updateDisplay(sum);
     smallerDisplayText();
