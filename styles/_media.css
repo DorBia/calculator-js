@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&family=Open+Sans:wght@400;500;700&display=swap");
+@media screen and (max-height: 750px) {
+  .change-mode {
+    margin-top: 1vh;
+  }
+}
+@media screen and (max-height: 895px) {
+  h1 {
+    display: none;
+  }
+
+  .change-mode {
+    margin-top: 5vh;
+    height: 2.7rem;
+    width: 15rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    padding: 5px;
+  }
+
+  .calculator {
+    margin: 1.5vh auto;
+  }
+}
+@media screen and (min-width: 768px) and (min-height: 940px) {
+  .change-mode {
+    margin: 2rem auto;
+  }
+
+  hr {
+    display: block;
+    border-color: #0e2935;
+    border-style: dotted none none;
+    border-width: 10px;
+    height: 0px;
+    width: 50%;
+    margin: auto;
+    opacity: 0.7;
+    margin-top: 1vh;
+  }
+
+  .light-mode hr {
+    border-color: #cbd8df;
+  }
+}

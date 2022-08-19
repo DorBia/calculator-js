@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&family=Open+Sans:wght@400;500;700&display=swap");
+.light-mode {
+  background-image: linear-gradient(to right, #19849c, #4cba9b);
+}
+.light-mode h1 {
+  color: #cbd8df;
+  text-shadow: -2px 2px 3px #5c5c5c;
+}
+.light-mode .change-mode {
+  background-color: #9ac5d3;
+  color: #121c24;
+}
+.light-mode .calculator {
+  background-color: #cbd8df;
+  box-shadow: -15px 15px 15px rgba(137, 137, 137, 0.55);
+}
+.light-mode .calculator__display {
+  color: #1e5067;
+}
+.light-mode .calculator__number, .light-mode .calculator__decimal {
+  background-color: #1e5067;
+}
+.light-mode .calculator__number:hover, .light-mode .calculator__number:focus, .light-mode .calculator__decimal:hover, .light-mode .calculator__decimal:focus {
+  background-color: #9ac5d3;
+  box-shadow: inset -1px 2px 12px #5c5c5c;
+}
+.light-mode .calculator__top-row {
+  box-shadow: 0px 2px 5px #afafaf, inset 0px 2px 1px #b1b1b1;
+}
+.light-mode .calculator__top-row:hover, .light-mode .calculator__top-row:focus {
+  background-color: #b1b1b1;
+  opacity: 0.8;
+}

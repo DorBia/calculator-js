@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&family=Open+Sans:wght@400;500;700&display=swap');
+
+
+$font-main: 'Open Sans', sans-serif;
+$font-header: 'M PLUS Rounded 1c', sans-serif;
+
+$color-background: #121c24;
+$color-text: #cbd8df;
+
+$color-shadow: #5c5c5c;
+$color-box-shadow: #b1b1b1;
+
+$color-buttons-main: #0e2935;
+$color-hover-main: #d7f9f8;
+
+$color-top-row: #9ac5d3;
+$color-operators: #159ab7;
+
+$gradient-dark: linear-gradient(to right, #656565, #a8a8a8);
+
+// for light theme
+$color-buttons-light: #1e5067;
+$gradient-light: linear-gradient(to right, #19849c, #4cba9b);

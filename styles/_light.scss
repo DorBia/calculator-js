@@ -1,0 +1,49 @@
+@use "./variables" as *;
+
+// light mode styling
+
+.light-mode {
+    background-image: $gradient-light;
+
+    h1 {
+        color: $color-text;
+        text-shadow: -2px 2px 3px #5c5c5c;
+    }
+
+    .change-mode {
+        background-color: $color-top-row;
+        color: $color-background;
+    }
+
+    .calculator {
+        background-color: $color-text;
+        box-shadow: -15px 15px 15px rgba(137, 137, 137, 0.55);
+
+
+        &__display {
+            color: $color-buttons-light;
+        }
+
+        &__number,
+        &__decimal {
+            background-color: $color-buttons-light;
+            &:hover,
+            &:focus {
+                background-color: $color-top-row;
+                box-shadow: inset -1px 2px 12px $color-shadow;
+
+            }
+        }
+
+        &__top-row {
+            box-shadow: 0px 2px 5px #afafaf, inset 0px 2px 1px $color-box-shadow;
+
+            &:hover,
+            &:focus {
+                background-color: $color-box-shadow;
+                opacity: 0.8;
+            }
+        }
+    }
+    
+}

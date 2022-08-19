@@ -51,8 +51,15 @@ const smallerDisplayText = () => {
     }
 };
 
-// update display with the number given
+// update display with the number given and make sure there are only up to 8 decimal places
 const updateDisplay = (number) => {
+    let separated = "";
+    if(number.includes(".")){
+        separated = number.split(".")
+        if (separated[1].length > 8){
+            number = (Number(number).toFixed(8)).toString();
+        }
+    }
 
     display.innerText = number
     if (number === "") {
@@ -82,7 +89,6 @@ const doMath = (num1, num2, operation) => {
     }
     return sum;
 };
-
 
 /* ------- ACTUAL CLICK EVENTS ------- */
 

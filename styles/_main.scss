@@ -1,0 +1,82 @@
+@use "./variables" as *;
+//main body, basic buttons, header, etc. styling
+
+// reset styling and set color of everything to white + body's background
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: $font-main;
+    color: $color-text;
+}
+
+body {
+    height: 100%;
+    background-image: $gradient-dark;
+}
+
+// basic styling of header and generic styling for buttons
+header {
+    text-align: center;
+}
+
+h1 {
+    margin: 3vh auto 1vh;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+}
+
+hr {
+    display: none;
+}
+
+button {
+    background-color: $color-buttons-main;
+    display: inline-block;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    margin: auto;
+    border: none;
+    font-size: 1.7rem;
+    box-shadow: 0px 2px 5px #235b75, inset 0px 2px 1px $color-box-shadow;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: inset -1px 2px 5px $color-shadow;
+    }
+}
+
+.colored-text {
+    background-image: linear-gradient(
+        to right,
+        #1f0b64 0%,
+        #57169d 33%,
+        #ff0055 66%,
+        #fef614 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: change-color 6s linear 1;
+}
+
+// additional button styling
+
+.change-mode {
+    height: 4rem;
+    width: 18rem;
+    border-radius: 25px;
+    font-size: 1.3rem;
+    padding: 5px;
+}
+
+// for animated heading
+
+@keyframes change-color {
+    to {
+        background-position: -200% center;
+    }
+}
