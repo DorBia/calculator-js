@@ -90,6 +90,8 @@ const doMath = (num1, num2, operation) => {
 changeModeButton.addEventListener("click", () => {
     const pageBody = document.body;
     pageBody.classList.toggle("light-mode");
+    const headingText = document.querySelector(".title");
+    headingText.classList.toggle("colored-text");
 });
 
 // for each number 0-9 when they are pressed "unclick" the +/= and equals buttons, change AC to C
