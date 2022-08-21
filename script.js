@@ -1,4 +1,5 @@
 /* ----- GET ACCESS TO HTML ------- */
+const allButtons = document.querySelectorAll("button");
 const changeModeButton = document.querySelector(".change-mode");
 const display = document.querySelector(".calculator__display");
 const clear = document.querySelector(".ac");
@@ -32,6 +33,18 @@ let isReverseOn = false;
 let isOperatorOn = false;
 let tempValue = "";
 
+
+/* ------ KEYBOARD PRESS AS CLICK ------ */
+
+window.addEventListener("keypress", e => {
+    allButtons.forEach(btn => {
+        if (btn.value == e.key) {
+            btn.click();
+        } else if (btn.getAttribute("data-operation") == e.key) {
+            btn.click()
+        }
+    });
+});
 
 /* ------ REUSABLE FUNCTIONS ------- */
 
@@ -109,9 +122,9 @@ numberButtons.forEach(number => {
         }
 
         if(!currentValue || currentValue === "0"){
-            currentValue = number.innerText;
+            currentValue = number.value;
         } else {
-            currentValue += number.innerText;
+            currentValue += number.value;
         }
 
         isEqualOn = false;

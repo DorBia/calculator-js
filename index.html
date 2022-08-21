@@ -12,36 +12,36 @@
     <header>
         <h1 class="title colored-text">JavaScript project 1 - Calculator</h1>
         <hr>
-        <button class="change-mode">Click here to change colors</button>
+        <button class="change-mode" value="t">Click here to change colors</button>
     </header>
     <div class="calculator">
         <div class="calculator__screen">
             <p class="calculator__display">0</p>
         </div>
         <div class="calculator__buttons">
-            <button class="calculator__top-row ac">AC</button>
-            <button class="calculator__top-row change-sign">+/-</button>
-            <button class="calculator__top-row percent">%</button>
-            <button class="calculator__operator" value="divide">&#247</button>
+            <button class="calculator__top-row ac" value="c">AC</button>
+            <button class="calculator__top-row change-sign" value="±">+/-</button>
+            <button class="calculator__top-row percent" value="%">%</button>
+            <button class="calculator__operator" value="divide" data-operation="/">&#247</button>
             
-            <button class="calculator__number">7</button>
-            <button class="calculator__number">8</button>
-            <button class="calculator__number">9</button>
-            <button class="calculator__operator" id="times" value="multiply">x</button>
+            <button class="calculator__number" value="7">7</button>
+            <button class="calculator__number" value="8">8</button>
+            <button class="calculator__number" value="9">9</button>
+            <button class="calculator__operator" id="times" value="multiply" data-operation="*">x</button>
             
-            <button class="calculator__number">4</button>
-            <button class="calculator__number">5</button>
-            <button class="calculator__number">6</button>
-            <button class="calculator__operator" id="minus" value="subtract">-</button>
+            <button class="calculator__number" value="4">4</button>
+            <button class="calculator__number" value="5">5</button>
+            <button class="calculator__number" value="6">6</button>
+            <button class="calculator__operator" id="minus" value="subtract"data-operation="-">-</button>
             
-            <button class="calculator__number">1</button>
-            <button class="calculator__number">2</button>
-            <button class="calculator__number">3</button>
-            <button class="calculator__operator" value="add">+</button>
+            <button class="calculator__number" value="1">1</button>
+            <button class="calculator__number" value="2">2</button>
+            <button class="calculator__number" value="3">3</button>
+            <button class="calculator__operator" value="add" data-operation="+">+</button>
             
-            <button class="calculator__number zero">0</button>
-            <button class="calculator__decimal">.</button>
-            <button class="calculator__equal">=</button>
+            <button class="calculator__number zero" value="0">0</button>
+            <button class="calculator__decimal" value=".">.</button>
+            <button class="calculator__equal" value="=">=</button>
         </div>
     </div>
     <script src="./script.js"></script>
