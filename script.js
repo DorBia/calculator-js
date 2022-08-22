@@ -44,6 +44,9 @@ window.addEventListener("keypress", e => {
             btn.click()
         }
     });
+    if (e.key === "Enter") {
+        equal.click();
+    }
 });
 
 /* ------ REUSABLE FUNCTIONS ------- */

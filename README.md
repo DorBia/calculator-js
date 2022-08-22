@@ -27,7 +27,7 @@ This basic calculator can perform some standard operations like addition, subtra
 Nothing is needed to run the code, it's fully web based, all you need is just go to the webpage and then it's ready to go - by clicking the buttons on the calculator or using the numbers and operators on the keyboard.
 
 ## 🎈 Usage <a name="usage"></a>
-- To use calculator either press on buttons with your mouse or use the keyboard - for numbers press digits 0-9, operations work with buttons +-*/, for equals press =, for percentage press %, for negate press ±, for decimal press ., to clear press c, to change theme press t. 
+- To use calculator either press on buttons with your mouse or use the keyboard - for numbers press digits 0-9, operations work with buttons +-*/, for equals press either Enter or =, for percentage press %, for negate press ±, for decimal press ., to clear press c, to change theme press t. 
 - <b>Inputs and outputs</b> are restricted to 8 decimal places, but not restricted when it comes to the total output.
 - To perform any <b>operation</b>, just give at least one number, then press any operator and either give the second number, or press the equal button, which will result in using the first number as a second number as well.
 - If second operator is clicked after first one (as when pressed + by mistake and then deciding to press - instead) it will work as expected and change the operator to the new one.
