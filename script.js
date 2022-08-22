@@ -172,13 +172,17 @@ changeSign.addEventListener("click", () => {
 
     isReverseOn = true;
 
-    if (currentValue) {
+    if (currentValue === "-") {
+        currentValue = "";
+    } else if (currentValue) {
         currentValue = (Number(currentValue) * (-1)).toString();
     } else if(isEqualOn) {
         currentValue = (Number(sum) * (-1)).toString();
         sum = "";
     } else if (!currentValue) {
         currentValue = "-";
+    } else if (currentValue === "-") {
+        currentValue = "";
     }
     
     updateDisplay(currentValue);
